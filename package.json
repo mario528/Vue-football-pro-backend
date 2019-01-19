@@ -2,7 +2,7 @@
   "name": "vue-football-pro-backend",
   "version": "1.0.0",
   "description": "vue-football-pro-backend",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,10 @@
   "author": "majiaao",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "mysql": "^2.16.0"
   }
 }
