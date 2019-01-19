@@ -1,0 +1,17 @@
+{
+  "name": "vue-football-pro-backend",
+  "version": "1.0.0",
+  "description": "vue-football-pro-backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js"
+  ],
+  "author": "majiaao",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
