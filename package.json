@@ -13,10 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "^1.4.3",
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "log4js": "^3.0.6",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "superagent": "^4.1.0"
   }
 }

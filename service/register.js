@@ -12,8 +12,25 @@ router.post('/register', (req,res)=> {
     console.log(username,password,telephone)
     DB.insertOne('user',
     {'username': username , 'password': password, 'phoneNumber': telephone },(err,result)=> {
-        if(err) 
-            console.log(err);
+        if(err) {
+            res.json({
+                data:[
+                    {
+                        status: false,
+                        state: -1
+                    }
+                ]
+            })
+            res.end();
+        } else {
+            res.json([
+                    {
+                        status: false,
+                        state: 1
+                    }
+                ])
+            res.end();
+        }
     })
 })
 module.exports = router;
