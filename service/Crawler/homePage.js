@@ -24,7 +24,3 @@ exports.getHomepageBanner = function (callback) {
         }
     })
 }
-const getRankList = function (type,callback) {
-    
-}
-getRankList();

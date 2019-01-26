@@ -1,6 +1,7 @@
 const express = require('express')
 const crypto = require('crypto')
 const DB = require('../model/database/mongoDB/Dao')
+const Identicon = require('identicon.js')
 const router = express.Router()
 
 router.post('/login', (req, res) => {
@@ -27,11 +28,16 @@ router.post('/login', (req, res) => {
         } else {
             if (result[0].password == password) {
                 console.log('登陆成功')
+                let md5 = crypto.createHash('md5');
+                md5.update(username);
+                const imgData = new Identicon(md5.digest('hex')).toString();
+                let imgUrl = 'data:image/png;base64,'+imgData
                 res.json({
                     data:[
                         {
                             status: false,
-                            state: 1
+                            state: 1,
+                            userIcon: imgUrl
                         }
                     ]
                 })
