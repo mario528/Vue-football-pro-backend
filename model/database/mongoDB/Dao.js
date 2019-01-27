@@ -44,7 +44,6 @@ exports.change = function (collectionName, json1, json2, callback) {
         console.log('数据库链接成功')
         const db = client.db('vue-football');
         db.collection(collectionName).update(json1, json2, (err, result) => {
-            console.log(result)
             callback(err, result);
         })
     })

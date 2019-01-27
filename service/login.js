@@ -28,20 +28,22 @@ router.post('/login', (req, res) => {
         } else {
             if (result[0].password == password) {
                 console.log('登陆成功')
-                let md5 = crypto.createHash('md5');
-                md5.update(username);
-                const imgData = new Identicon(md5.digest('hex')).toString();
-                let imgUrl = 'data:image/png;base64,'+imgData
-                res.json({
-                    data:[
-                        {
-                            status: false,
-                            state: 1,
-                            userIcon: imgUrl
-                        }
-                    ]
+                DB.find('user',{'username':username},(err,result)=>{
+                    if(err) {
+                        console.log('数据查询失败')
+                    }else {
+                        res.json({
+                            data:[
+                                {
+                                    status: true,
+                                    state: 1,
+                                    userIcon: result[0].userImageUrl
+                                }
+                            ]
+                        })
+                        res.end()
+                    }
                 })
-                res.end()
             } else {
                 res.json({
                     data:[
