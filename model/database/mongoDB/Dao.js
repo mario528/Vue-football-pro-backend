@@ -13,7 +13,7 @@ const _connectDB = function (callback) {
 exports.insertOne = function (collectionName, json, callback) {
     _connectDB((err, client) => {
         if (err) throw new Error('数据库链接失败')
-        console.log('数据库链接成功')
+        console.log('MongoDB数据库链接成功')
         const db = client.db('vue-football');
         db.collection(collectionName).insertOne(json, (err, result) => {
             callback(err, result)
@@ -24,7 +24,7 @@ exports.insertOne = function (collectionName, json, callback) {
 exports.deleteObj = function (collectionName, json, status, callback) {
     _connectDB((err, client) => {
         if (err) throw new Error('数据库链接失败')
-        console.log('数据库链接成功')
+        console.log('MongoDB数据库链接成功')
         const db = client.db('vue-football');
         if (status == true) {
             db.collection(collectionName).deleteMany(json, (err, result) => {
@@ -41,7 +41,7 @@ exports.deleteObj = function (collectionName, json, status, callback) {
 exports.change = function (collectionName, json1, json2, callback) {
     _connectDB((err, client) => {
         if (err) throw new Error('数据库链接失败')
-        console.log('数据库链接成功')
+        console.log('MongoDB数据库链接成功')
         const db = client.db('vue-football');
         db.collection(collectionName).update(json1, json2, (err, result) => {
             callback(err, result);

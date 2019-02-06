@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.post('/login', (req, res) => {
     console.log("请求登陆接口")
+    const that = this;
     const md5 = crypto.createHash('md5');
     const username = req.body.username;
     const password=md5.update(req.body.password).digest('base64');

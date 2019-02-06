@@ -1,8 +1,9 @@
 const superagent = require('superagent');
 const cheerio = require('cheerio');
 const rankType = require('./rankType')
+const baseUrl = 'https://www.dongqiudi.com';
+
 exports.getHomepageBanner = function (callback) {
-    const baseUrl = 'https://www.dongqiudi.com';
     superagent.get(baseUrl).end((err, res) => {
         if (err) {
             callback(err, null);
@@ -23,4 +24,7 @@ exports.getHomepageBanner = function (callback) {
             callback(null, swiperObj)
         }
     })
+}
+exports.getHotMatch = function (callback) {
+    
 }

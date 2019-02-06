@@ -16,12 +16,14 @@
     "cheerio": "^1.0.0-rc.2",
     "connect-multiparty": "^2.2.0",
     "cookie-parser": "^1.4.3",
+    "cookies": "^0.7.3",
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "formidable": "^1.2.1",
     "identicon.js": "^2.3.3",
     "log4js": "^3.0.6",
     "mysql": "^2.16.0",
+    "socket.io": "^2.2.0",
     "superagent": "^4.1.0"
   }
 }
