@@ -4,10 +4,16 @@ const router = express.Router()
 
 router.get('/home',(req,res)=> {
     homePage.getHomepageBanner((err,result)=> {
-        res.json({
-            banner: result
+        homePage.getHotMatch((err,re) => {
+            res.json({
+               data: {
+                    banner: result,
+                    hotMathch: re
+               },
+               status: true
+            })
+            res.end();
         })
-        res.end();
     })
 })
 module.exports = router;

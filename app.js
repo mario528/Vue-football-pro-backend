@@ -2,22 +2,28 @@ const express = require('express')
 const route = require('./service/index')
 const bodyParser = require("body-parser");
 const cookieParase = require('cookie-parser')
-const cookies = require('cookies');
+// const Cookies = require('cookies');
+const log4js = require('log4js')
 const app = express();
+const signStr = 'xadsafeowirw'
 
-app.use((req, res, next) => {
-    req.cookies = new cookies(req, res)
-    req.userInfo = {};
-    if(req.cookies.get('userInfo')) {
-        req.userInfo = JSON.parse(req.cookies.get('userInfo'))
-    }
-    next();
-})
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 app.use(bodyParser.json())
-app.use(cookieParase());
+app.use(cookieParase(signStr));
+//设置cookie
+// app.use(function(req,res,next){
+// 	req.Cookies = new Cookies(req,res); //调用req的cookies方法把Cookies加载到req对象里面
+// 	req.userInfo = {}; 
+// 	if(req.Cookies.get('userInfo')){
+// 		try{
+// 			req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+// 		}catch(e){}
+// 	}
+// 	next();
+// })
+
 
 route(app)
 app.listen(3000, () => {

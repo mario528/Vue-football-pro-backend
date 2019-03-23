@@ -28,6 +28,11 @@ router.post('/register', (req,res)=> {
             })
             res.end();
         } else {
+            DB.insertOne('userInfomation',{
+                'username': username,
+                'isVip': false
+            },(err,result)=> {
+            })
             res.json([
                     {
                         status: false,

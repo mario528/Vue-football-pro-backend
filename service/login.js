@@ -1,15 +1,15 @@
 const express = require('express')
 const crypto = require('crypto')
+const Cookies = require('cookies');
 const DB = require('../model/database/mongoDB/Dao')
 const Identicon = require('identicon.js')
 const router = express.Router()
 
 router.post('/login', (req, res) => {
     console.log("请求登陆接口")
-    const that = this;
     const md5 = crypto.createHash('md5');
     const username = req.body.username;
-    const password=md5.update(req.body.password).digest('base64');
+    const password = md5.update(req.body.password).digest('base64');
     DB.find('user', {
         'username': username
     }, (err, result) => {
@@ -33,6 +33,7 @@ router.post('/login', (req, res) => {
                     if(err) {
                         console.log('数据查询失败')
                     }else {
+                        res.cookie('username',username,{maxAge: 36000})
                         res.json({
                             data:[
                                 {
@@ -54,7 +55,7 @@ router.post('/login', (req, res) => {
                         }
                     ]
                 })
-                console.log('密码错误!')
+                console.log('密码错误')
                 res.end()
             }
         }

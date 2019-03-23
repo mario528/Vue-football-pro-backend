@@ -26,5 +26,27 @@ exports.getHomepageBanner = function (callback) {
     })
 }
 exports.getHotMatch = function (callback) {
-    
+    superagent.get(baseUrl).end((err, res) => {
+        if (err) {
+            callback(err, null);
+        } else {
+            let $ = cheerio.load(res.text);
+            let hotMatchList = [];
+            $('#main>#top>#list>li').each((idx, element) => {
+                let $ = cheerio.load(element);
+                let awayTeamName = $('.matchinfo>.away').text().replace(/\s+/g, "");
+                let awayTeamIcon = $('.matchinfo>.away>img').attr('src')
+                let homeTeamName = $('.matchinfo>.home').text().replace(/\s+/g, "");
+                let homeTeamIcon = $('.matchinfo>.home>img').attr('src')
+                let matchState = $('.matchinfo>.stat>h2').text().replace(/\s+/g, "");
+                hotMatchList[idx] = {}
+                hotMatchList[idx].awayTeamName = awayTeamName 
+                hotMatchList[idx].awayTeamIcon = awayTeamIcon
+                hotMatchList[idx].homeTeamName = homeTeamName
+                hotMatchList[idx].homeTeamIcon = homeTeamIcon
+                hotMatchList[idx].matchState = matchState
+            })
+            callback(null, hotMatchList)
+        }
+    })
 }
