@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 app.use(cookieParase(signStr));
 //设置cookie
 // app.use(function(req,res,next){
-// 	req.Cookies = new Cookies(req,res); //调用req的cookies方法把Cookies加载到req对象里面
+// 	req.Cookies = new Cookies(req,res);
 // 	req.userInfo = {}; 
 // 	if(req.Cookies.get('userInfo')){
 // 		try{

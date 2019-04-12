@@ -8,7 +8,14 @@ const getTeamInfo = require('./getTeamInfo') // 获取球队信息
 const getUserInfo = require('./getUserInfo') // 获取用户信息
 const getTeamData = require('./getTeamData')
 const joinFavouriteTeam = require('./joinFavouriteTeam')
-// const getPlayerInfo = require('./getUserInfo') // 获取球员信息
+const forumHomePage = require('./forumHomePage')
+const forumSearch = require('./forumSearch')
+const verificationCode = require('./verificationCode')
+const forumFound = require('./forumFound')
+const forumPage = require('./forumPage')
+const followForum = require('./followForum')
+const pbulishForum = require('./pbulishForum')
+const getForumPage = require('./getForumPage')
 module.exports = (app) => {
     app.use(login)
     app.use(register)
@@ -20,5 +27,13 @@ module.exports = (app) => {
     app.use(getUserInfo)
     app.use(getTeamData)
     app.use(joinFavouriteTeam)
+    app.use(forumHomePage)
+    app.use(forumSearch)
+    app.use(verificationCode)
+    app.use(forumFound)
+    app.use(forumPage)
+    app.use(followForum)
+    app.use(pbulishForum)
+    app.use(getForumPage)
     // app.user(getPlayerInfo)
 }

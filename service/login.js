@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
                     if(err) {
                         console.log('数据查询失败')
                     }else {
-                        res.cookie('username',username,{maxAge: 36000})
+                        res.cookie('username',username,{maxAge: 900000, httpOnly: true})
                         res.json({
                             data:[
                                 {
