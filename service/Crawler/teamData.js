@@ -4,7 +4,6 @@ const rankType = require('./rankType')
 const DB = require('../../model/database/mongoDB/Dao')
 const teamDetailInfo = require('./getTeamDetailInfo')
 exports.getTeamData = function (teamName, callback) {
-    let teamPlayerInfo = []
     DB.find('teamInfo', {
         'teamName': teamName
     }, (err, result) => {

@@ -11,6 +11,7 @@ exports.getTeamData = function (teamName, callback) {
         const baseUrl = 'https://www.dongqiudi.com/team/' + teamNum + '.html';
         const schedule = [];
         const teamMember = [];
+        const honourList = [];
         superagent.get(baseUrl).end((err, res) => {
             if (err) {
                 callback(err, null)
@@ -70,6 +71,21 @@ exports.getTeamData = function (teamName, callback) {
                     playerInfo.playerNationFlag = playerNationFlag;
                     teamMember.push(playerInfo)
                 })
+                $('.honour_record>.honour_list>.honour_item').each((index,element)=> {
+                    const $a = cheerio.load(element)
+                    let honourObj = {};
+                    let sessionList = []
+                    honourObj.title = $a('.honour_item_title>img').attr('src');
+                    honourObj.name = $a('.honour_item_title>.match_name').text();
+                    honourObj.times = $a('.honour_item_title>span:nth-child(3)').text();
+                    $a('.session_area>span').each((index,element)=> {
+                        const $aa = cheerio.load(element)
+                        let sessionItem = $aa('span').text();
+                        sessionList.push(sessionItem)
+                    })
+                    honourObj.sessionList = sessionList;
+                    honourList.push(honourObj)
+                })
                 let teamInfo = {
                     data: {
                         teamInfo: {
@@ -83,7 +99,8 @@ exports.getTeamData = function (teamName, callback) {
                             nationalFlag: nationalFlag,
                         },
                         schedule: schedule,
-                        teamMember: teamMember
+                        teamMember: teamMember,
+                        honourList: honourList
                     },
                     status: true
                 }
