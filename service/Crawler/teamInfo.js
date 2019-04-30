@@ -85,7 +85,7 @@ exports.getTeamData = function (teamName, callback) {
                     })
                     honourObj.sessionList = sessionList;
                     honourList.push(honourObj)
-                })
+                })                
                 let teamInfo = {
                     data: {
                         teamInfo: {

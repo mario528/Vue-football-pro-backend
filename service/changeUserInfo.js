@@ -9,19 +9,16 @@ router.post('/changeUserInfo', (req, res) => {
     const userName = req.body.userName;
     let changeContent;
     let key;
-    if (type == 0) {
-        changeContent = req.body.changeContent
-        jsonStr = {"username": changeContent}
-    } else if (type == 1) {
+   if (type == 0) {
         changeContent = md5.update(req.body.changeContent).digest('base64')
         jsonStr = {"password": changeContent}
-    } else if (type == 2) {
+    } else if (type == 1) {
         changeContent = req.body.changeContent
         jsonStr = {"phoneNumber": changeContent}
-    } else if (type == 3) {
+    } else if (type == 2) {
         changeContent = req.body.changeContent
         jsonStr = {"selfIntroduce": changeContent}
-    } else if (type == 4) {
+    } else if (type == 3) {
         changeContent = req.body.changeContent
         jsonStr = {"sex": changeContent}
     }

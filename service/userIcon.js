@@ -39,13 +39,13 @@ router.post('/loadUserIcon', (req, res) => {
                         'username': userName
                     }, {
                         $set: {
-                            'userImageUrl': res1
+                            'userImageUrl': 'http://'+res1
                         }
                     }, (err, result) => {
                         res.json({
                             data: {
                                 state: 1,
-                                userIcon: res1
+                                userIcon: 'http://'+res1
                             }
                         })
                         res.end();

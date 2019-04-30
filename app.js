@@ -2,9 +2,9 @@ const express = require('express')
 const route = require('./service/index')
 const bodyParser = require("body-parser");
 const cookieParase = require('cookie-parser')
-// const Cookies = require('cookies');
-const log4js = require('log4js')
+const socketIO = require('socket.io');
 const app = express();
+global.userList = []
 const signStr = 'xadsafeowirw'
 
 app.use(bodyParser.urlencoded({
@@ -12,20 +12,14 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 app.use(cookieParase(signStr));
-//设置cookie
-// app.use(function(req,res,next){
-// 	req.Cookies = new Cookies(req,res);
-// 	req.userInfo = {}; 
-// 	if(req.Cookies.get('userInfo')){
-// 		try{
-// 			req.userInfo = JSON.parse(req.cookies.get('userInfo'));
-// 		}catch(e){}
-// 	}
-// 	next();
-// })
-
 
 route(app)
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
     console.log("----------服务器启动成功----------")
+});
+const io = socketIO.listen(server);
+io.sockets.once('connection', (socket) => {
+    console.log('++++++++++用户连接成功++++++++++')
+    const socketID = socket.id
+    global.socketID = socketID
 });

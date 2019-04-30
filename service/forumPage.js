@@ -18,18 +18,23 @@ router.post('/forum/forumHome', (req, res) => {
             const forumFollowerNum = result[0].forumFollowerNum;
             const forumFollowers = result[0].forumFollowers;
             const invitation = result[0].invitation;
-            res.json({
-                data: {
-                    forumInfo: {
-                        forumFollowerNum: forumFollowerNum,
-                        forumFollowers: forumFollowers,
-                        foundBy: foundBy
+            let isFollower;
+            DB.find('forumUser',{userName: userName},(err,result1)=> {
+                result1[0].favForumList.indexOf(forumName) == -1 ? isFollower = false : isFollower = true
+                res.json({
+                    data: {
+                        forumInfo: {
+                            forumFollowerNum: forumFollowerNum,
+                            forumFollowers: forumFollowers,
+                            foundBy: foundBy
+                        },
+                        invitation: invitation,
+                        isFollower: isFollower
                     },
-                    invitation: invitation,
-                },
-                state: true
+                    state: true
+                })
+                res.end();
             })
-            res.end();
         }
     })
 })
