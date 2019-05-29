@@ -12,6 +12,8 @@
   "author": "majiaao",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.2",
+    "autocannon": "^3.2.1",
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "connect-multiparty": "^2.2.0",

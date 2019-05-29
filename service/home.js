@@ -9,7 +9,7 @@ router.get('/home', (req, res) => {
     if (req.cookies.username) {
         const username = req.cookies.username;
         global.userList.push({
-            [global.socketID]: username
+            username:[global.socketID]
         })
         DB.find('user', {
             "username": username

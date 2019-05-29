@@ -11,9 +11,6 @@ router.post('/user/activationEmail', (req, res) => {
     if(type == '0') {
         console.log("获取激活码")
         const code = Math.floor(Math.random()*1000000);
-        // redis.set(email,code);
-        // redis.expire(email,60*10);
-        // Email.main(email,"测试专用","测试专用",code)
         res.json({
             state: 0,
             code: code

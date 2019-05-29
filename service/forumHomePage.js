@@ -17,11 +17,17 @@ router.post('/forum/home', (req, res) => {
                 'user_id': user_id,
                 'favForumList': []
             }, (err, result) => {
-                res.json({
-                    status: 1
+                DB.insertOne('userForumPublish',{
+                    'userName': userName,
+                    'publish': [],
+                    'reply': []
+                },(err,result3)=> {
+                    res.json({
+                        status: 1
+                    })
+                    res.end();
                 })
-                res.end();
-            })
+            });
         } else {
             res.json({
                 status: true,

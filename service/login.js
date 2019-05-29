@@ -2,7 +2,6 @@ const express = require('express')
 const crypto = require('crypto')
 const Cookies = require('cookies');
 const socketIO = require('socket.io');
-
 const DB = require('../model/database/mongoDB/Dao')
 const Identicon = require('identicon.js')
 const server = require('../app')
@@ -31,9 +30,14 @@ router.post('/login', (req, res) => {
         } else {
             if (result[0].password == password) {
                 console.log('登陆成功')
-                global.userList.push({
-                    [global.socketID]: username
-                })
+                console.log("_______________________________________")
+                console.log(global.userList.hasOwnProperty(username))
+                console.log("_______________________________________")
+                if (!global.userList.hasOwnProperty(username)) {
+                    global.userList.push({
+                        [username]: global.socket
+                    })
+                }
                 console.log(global.userList)
                 DB.find('user', {
                     'username': username
@@ -49,7 +53,7 @@ router.post('/login', (req, res) => {
                             data: [{
                                 status: true,
                                 state: 1,
-                                userIcon: result[0].userImageUrl
+                                userIcon: result[0].userImageUrl,
                             }]
                         })
                         res.end()

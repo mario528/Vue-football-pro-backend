@@ -14,10 +14,14 @@ router.post('/forum/forumHome', (req, res) => {
             })
             res.end();
         } else {
-            const foundBy = result[0].foundBy;
-            const forumFollowerNum = result[0].forumFollowerNum;
-            const forumFollowers = result[0].forumFollowers;
-            const invitation = result[0].invitation;
+            const data = result[0]
+            const foundBy = data.foundBy;
+            const forumFollowerNum = data.forumFollowerNum;
+            const forumFollowers = data.forumFollowers;
+            const invitation = data.invitation;
+            const forumIcon = data.forumIcon;
+            const forumTabs = data.forumTabs;
+            const forumIntroduce = data.forumIntroduce
             let isFollower;
             DB.find('forumUser',{userName: userName},(err,result1)=> {
                 result1[0].favForumList.indexOf(forumName) == -1 ? isFollower = false : isFollower = true
@@ -26,7 +30,10 @@ router.post('/forum/forumHome', (req, res) => {
                         forumInfo: {
                             forumFollowerNum: forumFollowerNum,
                             forumFollowers: forumFollowers,
-                            foundBy: foundBy
+                            foundBy: foundBy,
+                            forumIcon: forumIcon,
+                            forumTabs: forumTabs,
+                            forumIntroduce: forumIntroduce
                         },
                         invitation: invitation,
                         isFollower: isFollower

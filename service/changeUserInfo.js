@@ -22,10 +22,6 @@ router.post('/changeUserInfo', (req, res) => {
         changeContent = req.body.changeContent
         jsonStr = {"sex": changeContent}
     }
-    console.log("type", type)
-    console.log("修改的数据", key)
-    console.log("修改的数据内容", changeContent)
-    console.log("用户名", userName)
     DB.change('user',{
         "username": userName
     },{$set:jsonStr}, (err, result) => {

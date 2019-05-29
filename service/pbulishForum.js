@@ -23,26 +23,31 @@ router.post('/forum/publish', (req, res) => {
                     "forumTitle": forumTitle,
                     "forumContent": forumContent,
                     "type": type,
-                    "time": time
+                    "time": time,
+                    'forumName': forumName
                 }]
             }
         }
     },(err,result)=> {
-        if(err) {
-            res.json({
-                data: {
-                    state: false
-                }
-            });
-            res.end();
-        }else {
-            res.json({
-                data: {
-                    state: true
-                }
-            });
-            res.end();
-        }
+        initUserPublish(userName,{
+            "forum_id":forum_id
+        },()=> {
+            if(err) {
+                res.json({
+                    data: {
+                        state: false
+                    }
+                });
+                res.end();
+            }else {
+                res.json({
+                    data: {
+                        state: true
+                    }
+                });
+                res.end();
+            }
+        })
     })
 })
 const getTimeDate = function () {
@@ -55,4 +60,18 @@ const getTimeDate = function () {
     const str = year + "年" + month + "月" + day + "日" + hour + "时" + minute + "分" + second + "秒";
     return str
 }
+const initUserPublish = function (userName,publishObj,cb) {
+    DB.change('userForumPublish',{
+        "userName": userName
+    },{
+        $addToSet: {
+            'publish': publishObj
+        }
+    },(err,result)=> {
+        if(err) {
+            return;
+        }
+        cb();
+    })
+};
 module.exports = router

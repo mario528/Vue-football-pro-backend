@@ -6,7 +6,10 @@ router.post('/forum/found', (req, res) => {
     const userName = req.body.foundBy;
     const userIcon = req.body.userIcon;
     const foundTime = new Date().toDateString().toString();
+    const forumIcon = req.body.forumIcon;
     const forumName = req.body.forumName;
+    const forumTabs = req.body.forumTabs;
+    const forumIntroduce = req.body.forumIntroduce;
     const forumFollowerNum = 1;
     const forumFollowers = [{
         "userName": userName,
@@ -18,8 +21,11 @@ router.post('/forum/found', (req, res) => {
         'foundTime': foundTime,
         "foundBy": userName,
         'forumFollowerNum': forumFollowerNum,
+        "forumIcon": forumIcon,
         'forumFollowers': forumFollowers,
-        "invitation": invitation
+        "invitation": invitation,
+        "forumTabs": forumTabs,
+        "forumIntroduce": forumIntroduce
     }, (err, result) => {
         DB.change('forumUser',{
             "userName": userName
