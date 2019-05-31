@@ -27,6 +27,7 @@ const attentionUser = require('./attentionUser')
 const userCenter = require('./userCenter')
 const userFriend = require('./userFriend')
 const cancelAttentionUser = require('./cancelAttentionUser')
+const userSuggest = require('./userSuggest')
 module.exports = (app) => {
     app.use(login)
     app.use(register)
@@ -57,4 +58,5 @@ module.exports = (app) => {
     app.use(userCenter)
     app.use(userFriend)
     app.use(cancelAttentionUser)
+    app.use(userSuggest)
 }

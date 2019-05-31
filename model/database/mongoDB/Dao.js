@@ -10,6 +10,7 @@ const _connectDB = function (callback) {
         callback(err, client);
     })
 }
+exports._connectDB = _connectDB
 exports.insertOne = function (collectionName, json, callback) {
     _connectDB((err, client) => {
         if (err) throw new Error('数据库链接失败')

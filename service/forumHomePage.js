@@ -17,28 +17,55 @@ router.post('/forum/home', (req, res) => {
                 'user_id': user_id,
                 'favForumList': []
             }, (err, result) => {
-                DB.insertOne('userForumPublish',{
+                DB.insertOne('userForumPublish', {
                     'userName': userName,
                     'publish': [],
                     'reply': []
-                },(err,result3)=> {
-                    res.json({
-                        status: 1
+                }, (err, result3) => {
+                    getHotForum().then((resList) => {
+                        res.json({
+                            status: 1,
+                            forumList: resList.slice(0, 10)
+                        })
+                        res.end();
                     })
-                    res.end();
                 })
             });
         } else {
-            res.json({
-                status: true,
-                data: {
-                    userInfo: {
-                        favForumList: result[0].favForumList == undefined ? [] : result[0].favForumList
+            getHotForum().then((resList) => {
+                res.json({
+                    status: true,
+                    data: {
+                        userInfo: {
+                            favForumList: result[0].favForumList == undefined ? [] : result[0].favForumList
+                        },
+                        forumList: resList.slice(0, 10)
                     }
-                }
+                })
+                res.end();
             })
-            res.end();
         }
     })
 });
+const getHotForum = function () {
+    return new Promise((resolve, reject) => {
+        DB._connectDB((err, client) => {
+            let result = [];
+            const db = client.db('vue-football');
+            let cursor = db.collection('forum').find().sort({
+                forumFollowerNum: -1
+            });
+            cursor.each((err, doc) => {
+                if (err) {
+                    console.log("查询失败");
+                    reject(err)
+                } else if (doc != null) {
+                    result.push(doc)
+                } else {
+                    resolve(result);
+                }
+            })
+        })
+    })
+}
 module.exports = router;

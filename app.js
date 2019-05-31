@@ -43,5 +43,8 @@ io.on('connection', function (socket) {
         });
         const emitSocket = userList[index][data.to]
         emitSocket.emit('returnMsg', data.msg)
+    });
+    socket.on('disconnect', function() {
+        console.log("用户断开链接")
     })
 })

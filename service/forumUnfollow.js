@@ -16,11 +16,28 @@ router.post('/forum/unfollow', (req, res) => {
                 status: false
             })
             res.end();
+        } else {
+            DB.change('forum', {
+                "forumName": forumName
+            }, {
+                $inc: {
+                    "forumFollowerNum": -1
+                }
+            }, (err, resu) => {
+                if (err) {
+                    res.json({
+                        status: false
+                    })
+                    res.end();
+                } else {
+                    res.json({
+                        status: true
+                    })
+                    res.end();
+                }
+            })
         }
-        res.json({
-            status: true
-        })
-        res.end();
+
     })
 })
 module.exports = router

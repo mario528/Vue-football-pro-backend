@@ -7,6 +7,7 @@ router.get('/home', (req, res) => {
     console.log("请求首页接口")
     console.log(global.userList)
     if (req.cookies.username) {
+        console.log("_________+++++++++++++")
         const username = req.cookies.username;
         global.userList.push({
             username:[global.socketID]

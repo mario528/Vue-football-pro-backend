@@ -14,8 +14,8 @@ const qn = require('qn')
 const config = {
     accessKey: 'MG0UOT8CqKWERRL5WCnwirnfDfclONsfnxx3NMPp',
     secretKey: 'pktFqmlNSQ06Z25vlws1GzBEqqM7zOXPz3TmA8-p',
-    bucket: 'vuefootball_ao',
-    origin: 'pqroqxu9n.bkt.clouddn.com'
+    bucket: 'vuefootball_jiaao',
+    origin: 'psdme4dz2.bkt.clouddn.com'
 }
 function QiniuFun (path, fileName) {
     this.fileName = fileName;
