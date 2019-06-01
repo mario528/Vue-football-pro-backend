@@ -28,6 +28,7 @@ const userCenter = require('./userCenter')
 const userFriend = require('./userFriend')
 const cancelAttentionUser = require('./cancelAttentionUser')
 const userSuggest = require('./userSuggest')
+const findTypeOfForum = require('./findTypeOfForum')
 module.exports = (app) => {
     app.use(login)
     app.use(register)
@@ -59,4 +60,5 @@ module.exports = (app) => {
     app.use(userFriend)
     app.use(cancelAttentionUser)
     app.use(userSuggest)
+    app.use(findTypeOfForum)
 }

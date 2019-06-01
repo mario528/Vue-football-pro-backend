@@ -25,7 +25,13 @@ router.post('/forum/home', (req, res) => {
                     getHotForum().then((resList) => {
                         res.json({
                             status: 1,
-                            forumList: resList.slice(0, 10)
+                            data: {
+                                banner: [
+                                    'http://psdme4dz2.bkt.clouddn.com/team_flag.jpg',
+                                    'http://psdme4dz2.bkt.clouddn.com/team.jpg'
+                                ],
+                                forumList: resList.slice(0, 10)
+                            }
                         })
                         res.end();
                     })
@@ -39,7 +45,11 @@ router.post('/forum/home', (req, res) => {
                         userInfo: {
                             favForumList: result[0].favForumList == undefined ? [] : result[0].favForumList
                         },
-                        forumList: resList.slice(0, 10)
+                        forumList: resList.slice(0, 10),
+                        banner: [
+                            'http://psdme4dz2.bkt.clouddn.com/team_flag.jpg',
+                            'http://psdme4dz2.bkt.clouddn.com/team.jpg'
+                        ]
                     }
                 })
                 res.end();

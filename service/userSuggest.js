@@ -33,7 +33,18 @@ router.post('/user/suggest', (req, res) => {
         })
 
     } else {
-
+        getHotForum().then((favourForumList) => {
+            const favourForumList_5 = favourForumList.slice(0, 5)
+            forumNewPublish_unLogin(favourForumList_5).then((res_suggest) => {
+                hotSuggest = res_suggest;
+                res.json({
+                    data: {
+                        hotSuggest: hotSuggest,
+                    }
+                })
+                res.end()
+            })
+        })
     }
 })
 const findUserCollectionList = function (userName) {
@@ -85,7 +96,6 @@ const getForumContent = function (forumId) {
                         list.push(ele)
                     }
                     if (index == forumReplyArray.length - 1) {
-                        // console.log("(2)")
                         resolve(list)
                     }
                 });
@@ -138,6 +148,28 @@ const forumNewPublish = function (favForumList) {
             }, (err, res) => {
                 console.log("_______==========", res)
                 if (res[0].invitation.length != 0) {
+                    const data = res[0].invitation[0].content;
+                    pageList.push(data)
+                }
+                if (index == favForumList.length - 1) {
+                    resolve(pageList)
+                }
+                index++;
+            })
+        })
+    })
+
+}
+const forumNewPublish_unLogin = function (favForumList) {
+    console.log(favForumList)
+    const pageList = []
+    let index = 0;
+    return new Promise((resolve, reject) => {
+        async.each(favForumList, (item) => {
+            DB.find('forum', {
+                'forumName': item.forumName
+            }, (err, res) => {
+                if (res[0] && res[0].invitation.length != 0) {
                     const data = res[0].invitation[0].content;
                     pageList.push(data)
                 }
