@@ -1,1 +1,5 @@
-# Vue-football-pro-backend
+# 懂球吗 - （后端项目）
+
+## 项目介绍
+
+基于Vue.js与Node.js的足球论坛数据系统
